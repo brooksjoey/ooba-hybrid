@@ -1,0 +1,17 @@
+{
+  "timeout_sec": 30,
+  "debug_mode": true,
+  "memory_max_tokens": 4000,
+  "log_level": "debug",
+  "retry_attempts": 3,
+  "cache_ttl": 3600,
+  "task_routing": {
+    "auto_route": true,
+    "fallback_on_failure": true
+  },
+  "memory_options": {
+    "ingest_dir": "memory/ingest",
+    "schema": "memory/schema.json",
+    "db_path": "memory/db"
+  }
+}
