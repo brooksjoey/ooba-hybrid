@@ -1,0 +1,37 @@
+# LLM routing strategy
+default: openai
+
+fallbacks:
+  openai:
+    model: gpt-4o
+    priority: 1
+
+  groq:
+    model: mixtral-8x7b
+    priority: 2
+
+  openrouter:
+    model: anthropic/claude-3.5-sonnet
+    priority: 3
+
+# Supported task types (used for dynamic routing, planning, etc.)
+tasks:
+  - name: summarize
+    description: Summarize memory or documents
+    agent: summarizer
+
+  - name: plan
+    description: Plan upcoming tasks or meetings
+    agent: planner
+
+  - name: ingest_context
+    description: Ingest new notes or contextual input into memory
+    agent: memory_manager
+
+  - name: calendar_sync
+    description: (placeholder) Sync or simulate calendar integration
+    agent: calendar_bot
+
+  - name: general_query
+    description: Fallback for all-purpose queries
+    agent: generalist
