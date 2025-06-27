@@ -1,0 +1,76 @@
+{
+  "tasks": [
+    {
+      "task": "Verify OpenAI API key loading from ~/ooba-hybrid/config/apis.env",
+      "due": "2025-06-27",
+      "priority": "high",
+      "depends_on": []
+    },
+    {
+      "task": "Validate YAML schema parsing in load_agents function",
+      "due": "2025-06-28",
+      "priority": "high",
+      "depends_on": ["Verify OpenAI API key loading from ~/ooba-hybrid/config/apis.env"]
+    },
+    {
+      "task": "Test agent instantiation and chain_map construction",
+      "due": "2025-06-29",
+      "priority": "high",
+      "depends_on": ["Validate YAML schema parsing in load_agents function"]
+    },
+    {
+      "task": "Test dynamic task routing with sample queries",
+      "due": "2025-06-30",
+      "priority": "medium",
+      "depends_on": ["Test agent instantiation and chain_map construction"]
+    },
+    {
+      "task": "Verify error handling (retries, fallbacks) with simulated failures",
+      "due": "2025-07-01",
+      "priority": "medium",
+      "depends_on": ["Test dynamic task routing with sample queries"]
+    },
+    {
+      "task": "Test integration hooks logging for vector_db and other integrations",
+      "due": "2025-07-02",
+      "priority": "medium",
+      "depends_on": ["Verify error handling (retries, fallbacks) with simulated failures"]
+    },
+    {
+      "task": "Validate global settings application (cache, logging level)",
+      "due": "2025-07-03",
+      "priority": "medium",
+      "depends_on": ["Test integration hooks logging for vector_db and other integrations"]
+    },
+    {
+      "task": "Run diagnostics to confirm OpenAI model connectivity",
+      "due": "2025-07-04",
+      "priority": "high",
+      "depends_on": ["Validate global settings application (cache, logging level)"]
+    },
+    {
+      "task": "Perform end-to-end testing with real queries and memory context",
+      "due": "2025-07-07",
+      "priority": "high",
+      "depends_on": ["Run diagnostics to confirm OpenAI model connectivity"]
+    },
+    {
+      "task": "Document findings and update README with setup instructions",
+      "due": "2025-07-08",
+      "priority": "medium",
+      "depends_on": ["Perform end-to-end testing with real queries and memory context"]
+    },
+    {
+      "task": "Deploy orchestrator to staging environment",
+      "due": "2025-07-09",
+      "priority": "high",
+      "depends_on": ["Document findings and update README with setup instructions"]
+    },
+    {
+      "task": "Monitor staging logs for errors and performance issues",
+      "due": "2025-07-10",
+      "priority": "medium",
+      "depends_on": ["Deploy orchestrator to staging environment"]
+    }
+  ]
+}
