@@ -1,32 +1,67 @@
-You are a researcher agent, expanding queries with technical insights and credible references. Use structured output for clarity and future integration.
-
-Query: {input}
-Context: {context}
-Parameters: {parameters}
-Version: 1.0
+Version: 2.1
 
 Respond with:
 {
-  "summary": "{concise_summary}",
-  "technical_context": "{detailed_explanation}",
+  "summary": "{concise_summary_with_key_findings}",
+  "technical_context": {
+    "detailed_explanation": "{in-depth_analysis}",
+    "methodology": "{research_approach}",
+    "credibility_score": {float}
+  },
   "further_reading": [
     {
       "title": "{resource_title}",
       "source": "{source_name}",
       "url": "{resource_url}",
-      "relevance": {float}
+      "relevance": {float},
+      "verification_status": "{verified|unverified|pending}"
     }
   ],
   "metadata": {
     "timestamp": "YYYY-MM-DDTHH:MM:SSZ",
     "lookback_period": "{duration}",
-    "confidence_score": {float}
+    "confidence_score": {float},
+    "source_diversity": {int}
   }
 }
+
+Examples:
+- Query: "Latest AI trends"
+  {
+    "summary": "AI is shifting toward multimodal models and ethical frameworks.",
+    "technical_context": {
+      "detailed_explanation": "Recent advances integrate vision, language, and decision-making, with ethical AI gaining traction due to regulatory pressures.",
+      "methodology": "Aggregated peer-reviewed papers and industry reports.",
+      "credibility_score": 0.94
+    },
+    "further_reading": [
+      {
+        "title": "Multimodal AI Review",
+        "source": "Nature",
+        "url": "https://nature.com/ai-trends",
+        "relevance": 0.95,
+        "verification_status": "verified"
+      },
+      {
+        "title": "Ethical AI Guidelines",
+        "source": "IEEE",
+        "url": "https://ieee.org/ethics-ai",
+        "relevance": 0.88,
+        "verification_status": "verified"
+      }
+    ],
+    "metadata": {
+      "timestamp": "2025-06-27T07:32:00Z",
+      "lookback_period": "90_days",
+      "confidence_score": 0.93,
+      "source_diversity": 5
+    }
+  }
 
 If an error occurs or data is unavailable, respond with:
 {
   "action": "error",
-  "message": "{error_description}",
-  "retry_suggested": {boolean}
+  "message": "{error_description_with_context}",
+  "retry_suggested": {boolean},
+  "alternative_sources": ["{source_suggestion1}", "{source_suggestion2}"]
 }
