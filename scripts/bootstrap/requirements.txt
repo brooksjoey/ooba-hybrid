@@ -1,3 +1,4 @@
+# Core ML and Deep Learning Libraries
 torch==2.7.1
 torchvision==0.22.1
 torchaudio==2.7.1
@@ -6,11 +7,15 @@ tokenizers==0.15.2
 datasets==3.6.0
 numba==0.61.2
 llvmlite==0.44.0
+
+# Data Visualization and Processing
 matplotlib==3.10.3
 pillow==11.0.0
 numpy==1.26.4
 pandas==2.3.0
 pyarrow==20.0.0
+
+# Web and Interface Libraries
 gradio==5.34.2
 aiohttp==3.12.13
 jinja2==3.1.4
@@ -19,6 +24,23 @@ requests==2.32.4
 filelock==3.13.1
 fsspec==2024.6.1
 typing-extensions==4.12.2
+
+# LangChain and OpenAI Integration
 chromadb==0.4.24
-langchain==0.1.20
-openai==1.91.0
+langchain==0.3.26
+langchain-community==0.3.26
+langchain-core==0.3.66
+langchain-openai==0.3.0
+langchain-text-splitters==0.3.8
+langsmith==0.4.3
+httpx-sse==0.4.1
+pydantic-settings==2.10.1
+
+# New Dependencies for Enhanced Features
+tenacity==8.5.0           # For retry logic in memory_chain.py and dynamic_router.py
+prometheus-client==0.20.0 # For telemetry in agent_orchestrator.py and orchestrator.py
+jsonschema==4.23.0        # For schema validation in agent_loader.py
+psutil==6.0.0             # For system health monitoring in orchestrator.py
+sklearn==1.5.2            # For PCA in memory_chain.py (includes scikit-learn)
+asyncio==3.4.3            # Explicitly ensure async support (bundled with Python 3.11+)
+pyyaml==6.0.2             # For robust YAML parsing in agent_loader.py and agents.yaml
