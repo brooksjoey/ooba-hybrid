@@ -3,51 +3,43 @@ agents:
     role: "conversational_strategist"
     model: "gpt-4o"
     tasks:
-      - name: "converse"
-        description: "Engage in natural, personality-driven conversation with confident, sharp-witted tone"
+      - name: "chat"
+        description: "Engage in dynamic, context-aware conversations"
         params:
-          tone: "confident, informal, sharp-witted"
-          max_response_length: 500
-          max_context_length: 2000
-      - name: "detect_intent"
-        description: "Analyze query to identify user intent and determine if delegation is needed"
-        params:
-          intent_confidence_threshold: 0.9
-          supported_intents: ["chat", "plan", "summarize", "store", "recall"]
-      - name: "delegate_task"
-        description: "Route tasks to appropriate agents based on detected intent"
-        params:
-          max_delegation_attempts: 2
+          temperature: 0.7
+          adaptive_tone: true
+          max_tokens: 500
     capabilities:
-      - "converse"
-      - "intent_detection"
-      - "task_delegation"
-      - "context_aware_response"
-      - "personality_mirroring"
-    integrations:
-      - "agent_router"
+      - "chat"
       - "sentiment_analysis"
-      - "vector_db"
+    integrations: []
     error_handling:
-      retry_attempts: 3
-      fallback: "Whoa, something's off—let's try that again with some extra grit."
+      retry_attempts: 2
+      fallback: "Chat agent hit a snag, switching gears!"
+    meta_config:
+      self_optimize: true
+      learning_rate: 0.05
 
   memory_agent:
     role: "long_term_memory"
     model: "gpt-4o"
     tasks:
       - name: "store_fact"
-        description: "Store user facts/context with metadata (timestamp, relevance score) in vectorized memory"
+        description: "Persistently store facts with metadata and versioning"
         params:
           max_storage: 10000
           embedding_type: "dense_vector"
+          auto_compress: true
       - name: "recall_fact"
-        description: "Retrieve context using semantic search with relevance ranking"
+        description: "Retrieve context via semantic search with relevance tuning"
         params:
           max_results: 10
           confidence_threshold: 0.85
+          dynamic_k: true
       - name: "update_fact"
-        description: "Update existing facts with new information, maintaining version history"
+        description: "Update facts with conflict resolution and versioning"
+        params:
+          version_control: "git-like"
     capabilities:
       - "memorize"
       - "recall"
@@ -59,23 +51,30 @@ agents:
       - "audit_log"
     error_handling:
       retry_attempts: 3
-      fallback: "local_cache"
+      fallback: "Falling back to local cache, boss!"
+    meta_config:
+      self_optimize: true
+      sync_interval: 300
 
   planner:
     role: "task_planner"
     model: "gpt-4o"
     tasks:
       - name: "create_task_list"
-        description: "Generate a prioritized task sequence from user goals using multi-step reasoning"
+        description: "Generate optimized, prioritized task plans"
         params:
           max_tasks: 20
-          optimization: "time_efficiency"
+          optimization_metric: "time_efficiency"
+          predictive_adjustment: true
       - name: "adjust_plan"
-        description: "Dynamically adjust task list based on new constraints or user feedback"
+        description: "Dynamically replan based on real-time feedback"
         params:
           feedback_loop: true
+          lookahead: 3
       - name: "resource_allocation"
-        description: "Assign resources (time, tools) to tasks for optimal execution"
+        description: "Optimize resource distribution with constraints"
+        params:
+          resource_pool: "dynamic"
     capabilities:
       - "plan"
       - "analyze"
@@ -87,21 +86,26 @@ agents:
       - "resource_manager"
     error_handling:
       retry_attempts: 3
-      fallback: "default_plan"
+      fallback: "Default plan activated, no sweat!"
+    meta_config:
+      self_optimize: true
+      priority_weight: 0.8
 
   summarizer:
-    role: "summary"
+    role: "summary_engine"
     model: "gpt-4o"
     tasks:
       - name: "summarize_conversation"
-        description: "Generate concise summaries of interactions with key points and action items"
+        description: "Condense dialogues into concise, actionable summaries"
         params:
           max_length: 200
           style: "bullet_points"
+          sentiment_tag: true
       - name: "generate_insights"
-        description: "Extract actionable insights and trends from conversation history"
+        description: "Extract trends and insights from historical data"
         params:
           lookback_period: "30_days"
+          confidence_level: 0.9
     capabilities:
       - "summarize"
       - "compress"
@@ -113,20 +117,25 @@ agents:
       - "sentiment_analysis"
     error_handling:
       retry_attempts: 3
-      fallback: "raw_text"
+      fallback: "Raw text output, keeping it real!"
+    meta_config:
+      self_optimize: true
+      insight_depth: 3
 
   orchestrator:
     role: "agent_coordinator"
     model: "gpt-4o"
     tasks:
       - name: "coordinate_agents"
-        description: "Manage agent interactions, delegate tasks, and resolve conflicts"
+        description: "Manage multi-agent workflows with load balancing"
         params:
           max_parallel_tasks: 5
+          task_prioritization: "dynamic"
       - name: "monitor_performance"
-        description: "Track agent performance metrics (latency, accuracy) and optimize workflows"
+        description: "Track and optimize agent performance metrics"
         params:
           logging_interval: "5_minutes"
+          alert_threshold: 0.75
     capabilities:
       - "task_delegation"
       - "conflict_resolution"
@@ -137,20 +146,19 @@ agents:
       - "alert_system"
     error_handling:
       retry_attempts: 5
-      fallback: "manual_mode"
+      fallback: "Switching to manual mode, captain!"
+    meta_config:
+      self_optimize: true
+      coordination_overhead: 0.1
 
 global_settings:
-  security:
-    encryption: "AES-256"
-    access_control: "RBAC"
-  scalability:
-    max_concurrent_users: 1000
-    load_balancer: "round_robin"
-  logging:
-    level: "INFO"
-    destination: "cloud_storage"
   performance:
     cache_strategy: "LRU"
     cache_size: "10GB"
-  api_credentials:
-    openai_api_key: "FILE:ooba-hybrid/config/apis.env"
+    auto_scaling: true
+  security:
+    api_key_source: "~/ooba-hybrid/config/apis.env"
+    encryption_level: "AES-256"
+  runtime:
+    heartbeat_interval: 60
+    failover_strategy: "round_robin"
